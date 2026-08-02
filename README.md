@@ -155,7 +155,3 @@ Update theme colors in `app/globals.css`:
 - Breakpoints: `sm` (640px), `md` (768px), `lg` (1024px)
 - Optimized for phones, tablets, and desktops
 - Touch-friendly interactive elements
-
----
-
-Built with ❤️ by [Roby Tanama](https://github.com/tanamaroby)
