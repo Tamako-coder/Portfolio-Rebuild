@@ -10,10 +10,11 @@ import Image from "next/image";
 
 export function FeaturedProjectsSection() {
   // Get 4 projects: 3 featured + 1 from allProjects (Aether)
+  const aetherProject = allProjects.find(p => p.id === "aether");
   const displayProjects = [
     ...featuredProjects,
-    allProjects.find(p => p.id === "aether")
-  ].filter(Boolean).slice(0, 4);
+    ...(aetherProject ? [aetherProject] : [])
+  ].slice(0, 4);
 
   return (
     <section className="py-12 md:py-16 relative overflow-hidden">
@@ -76,12 +77,12 @@ export function FeaturedProjectsSection() {
                       </CardTitle>
 
                       {/* Award badge if exists */}
-                      {project.award && (
+                      {('award' in project && project.award) ? (
                         <p className="flex items-center gap-1.5 text-xs font-medium text-primary/80">
                           <Trophy className="w-3 h-3" />
-                          {project.award}
+                          {project.award as string}
                         </p>
-                      )}
+                      ) : null}
 
                       <CardDescription className="text-xs md:text-sm font-medium">
                         {project.tagline}

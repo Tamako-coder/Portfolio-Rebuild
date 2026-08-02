@@ -156,4 +156,6 @@ Update theme colors in `app/globals.css`:
 - Optimized for phones, tablets, and desktops
 - Touch-friendly interactive elements
 
-This is still in the testing fase
+---
+
+Built with ❤️ by [Roby Tanama](https://github.com/tanamaroby)
