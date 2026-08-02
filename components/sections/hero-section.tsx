@@ -1,11 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import { personalInfo } from "@/lib/data/portfolio-data";
 import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
-import { Mail } from "lucide-react";
+import { Mail, ArrowRight } from "lucide-react";
 
 const socialLinks = [
   { icon: FaGithub, href: personalInfo.social.github, label: "GitHub" },
@@ -16,116 +15,155 @@ const socialLinks = [
 
 export function HeroSection() {
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-muted/20 -z-10" />
+    <section className="relative overflow-hidden py-12 sm:py-16 md:py-20 lg:py-24">
+      {/* Diagonal background accent */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-br from-primary/5 via-transparent to-transparent transform rotate-6 scale-150" />
+        <div className="absolute bottom-0 left-0 w-2/3 h-2/3 bg-gradient-to-tr from-available/5 via-transparent to-transparent transform -rotate-12" />
+      </div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="max-w-4xl mx-auto text-center space-y-8">
-          {/* Status Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <span className="inline-flex items-center gap-2 rounded-full border border-available/30 bg-available/10 px-4 py-1.5 text-xs font-medium text-available glow-available-sm">
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-available"></span>
-              {personalInfo.status}
-            </span>
-          </motion.div>
+      <div className="container mx-auto px-4 sm:px-6">
+        {/* Asymmetric grid layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
 
-          {/* Name */}
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight"
-          >
-            {personalInfo.name}
-          </motion.h1>
+          {/* Left column - Main content */}
+          <div className="lg:col-span-7 space-y-4 sm:space-y-5">
+            {/* Name and Status Badge side by side */}
+            <div className="flex flex-col lg:flex-row lg:items-end lg:gap-4">
+              {/* Name - Bold, tight, left-aligned */}
+              <motion.h1
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter leading-[0.95] mb-4 lg:mb-0"
+              >
+                {personalInfo.name.split(" ").map((word, i) => (
+                  <span key={i} className={i === 1 ? "text-primary block" : "block"}>
+                    {word}
+                  </span>
+                ))}
+              </motion.h1>
 
-          {/* Title */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-xl sm:text-2xl md:text-3xl text-muted-foreground font-medium"
-          >
-            {personalInfo.title}
-          </motion.p>
+              {/* Status Badge - Aligned with "Tanama" */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5 }}
+                className="inline-block lg:mb-1"
+              >
+                <span className="inline-flex items-center gap-2 rounded-full border border-available/30 bg-available/10 px-3 py-1 text-xs font-medium text-available glow-available-sm whitespace-nowrap">
+                  <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-available"></span>
+                  {personalInfo.status}
+                </span>
+              </motion.div>
+            </div>
 
-          {/* Tagline */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto"
-          >
-            <p>
+            {/* Title - Overlapping element */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="relative -mt-2"
+            >
+              <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground font-medium border-l-4 border-primary pl-4">
+                {personalInfo.title}
+              </p>
+            </motion.div>
+
+            {/* Tagline - Compact */}
+            <motion.p
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="text-base sm:text-lg text-muted-foreground max-w-xl leading-relaxed"
+            >
               {personalInfo.tagline} with focus on{" "}
               <span className="text-foreground font-semibold">
                 {personalInfo.description}
               </span>
-            </p>
-          </motion.div>
+            </motion.p>
 
-          {/* CTAs */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4"
-          >
-            <Link
-              href="/work"
-              className="inline-flex w-full sm:w-auto shrink-0 items-center justify-center rounded-lg border border-transparent bg-primary text-primary-foreground hover:bg-primary/80 h-9 gap-1.5 px-2.5 text-sm font-medium transition-all"
+            {/* CTAs - Inline, compact */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="flex flex-wrap items-center gap-3 pt-2"
             >
-              View My Work
-            </Link>
-            <Link
-              href="/contact"
-              className="inline-flex w-full sm:w-auto shrink-0 items-center justify-center rounded-lg border border-border bg-background hover:bg-muted hover:text-foreground h-9 gap-1.5 px-2.5 text-sm font-medium transition-all"
-            >
-              Let&apos;s Talk
-            </Link>
-          </motion.div>
-
-          {/* Social Links */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            className="flex items-center justify-center gap-6 pt-8"
-          >
-            {socialLinks.map((social) => (
-              <a
-                key={social.label}
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-foreground transition-colors"
-                aria-label={social.label}
+              <Link
+                href="/work"
+                className="group inline-flex items-center gap-2 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 px-5 py-2.5 text-sm font-semibold transition-all hover:gap-3"
               >
-                <social.icon size={24} />
-              </a>
-            ))}
-          </motion.div>
+                View My Work
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 rounded-lg border border-border hover:bg-muted px-5 py-2.5 text-sm font-semibold transition-all"
+              >
+                Let&apos;s Talk
+              </Link>
+            </motion.div>
+          </div>
+
+          {/* Right column - Social + Stats card (overlapping) */}
+          <div className="lg:col-span-5 flex flex-col gap-4 sm:gap-6">
+            {/* Floating social card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+              className="bg-card/50 backdrop-blur-sm border border-border rounded-2xl p-5 sm:p-6 space-y-4"
+            >
+              <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Connect</h3>
+              <div className="grid grid-cols-2 gap-3">
+                {socialLinks.map((social, i) => (
+                  <motion.a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.3, delay: 0.6 + i * 0.1 }}
+                    className="flex items-center gap-3 p-3 rounded-xl border border-border hover:border-primary/50 hover:bg-primary/5 transition-all group"
+                    aria-label={social.label}
+                  >
+                    <social.icon className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+                    <span className="text-xs font-medium">{social.label}</span>
+                  </motion.a>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Decorative element - Subtle diagonal accent */}
+            <motion.div
+              initial={{ opacity: 0, rotate: -2 }}
+              animate={{ opacity: 1, rotate: 1 }}
+              transition={{ duration: 0.7, delay: 0.7 }}
+              className="hidden lg:block bg-gradient-to-br from-primary/10 to-available/10 rounded-2xl p-6 border border-primary/20 transform rotate-1 hover:rotate-0 transition-transform duration-300"
+            >
+              <p className="text-sm text-muted-foreground italic">
+                "Building experiences that matter"
+              </p>
+            </motion.div>
+          </div>
         </div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Scroll indicator - minimal */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.8 }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+        transition={{ duration: 0.5, delay: 1 }}
+        className="absolute bottom-4 left-1/2 transform -translate-x-1/2 hidden sm:block"
       >
         <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
-          className="w-6 h-10 border-2 border-muted-foreground rounded-full flex items-start justify-center p-2"
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="text-muted-foreground text-xs"
         >
-          <motion.div className="w-1.5 h-1.5 bg-muted-foreground rounded-full" />
+          ↓
         </motion.div>
       </motion.div>
     </section>
