@@ -17,17 +17,33 @@ const navItems = [
 
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      const currentScrollY = window.scrollY;
+
+      // Set background when scrolled
+      setIsScrolled(currentScrollY > 20);
+
+      // Hide on scroll down, show on scroll up
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // Scrolling down & past 100px
+        setIsVisible(false);
+      } else {
+        // Scrolling up or at top
+        setIsVisible(true);
+      }
+
+      setLastScrollY(currentScrollY);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [lastScrollY]);
 
   const handleHomeClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     // If already on homepage, scroll to top instead of navigating
@@ -43,6 +59,8 @@ export function Navigation() {
         isScrolled
           ? "bg-background/80 backdrop-blur-md border-b border-border"
           : "bg-transparent"
+      } ${
+        isVisible ? "translate-y-0" : "-translate-y-full"
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -50,7 +68,7 @@ export function Navigation() {
           {/* Logo */}
           <Link
             href="/"
-            className="group flex items-center gap-2.5"
+            className="group flex items-center gap-4 sm:gap-2.5"
             onClick={handleHomeClick}
           >
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary glow-primary-sm transition-all duration-300 group-hover:scale-110">
@@ -58,7 +76,7 @@ export function Navigation() {
                 {personalInfo.initials}
               </span>
             </div>
-            <span className="hidden font-semibold tracking-tight text-foreground sm:block">
+            <span className="font-semibold tracking-tight text-foreground text-sm sm:text-base">
               {personalInfo.name}
             </span>
           </Link>

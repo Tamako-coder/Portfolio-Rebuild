@@ -14,10 +14,10 @@ const fadeInUp = {
 
 export function AboutSection() {
   return (
-    <section id="about" className="section-padding mx-auto max-w-6xl">
+    <section id="about" className="mx-auto max-w-6xl px-4 sm:px-6">
       {/* Section Header */}
       <motion.div
-        className="mb-16 flex flex-col items-center gap-3 text-center"
+        className="mb-8 md:mb-10 flex flex-col items-start gap-2"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -26,13 +26,13 @@ export function AboutSection() {
         <span className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
           About
         </span>
-        <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+        <h2 className="text-3xl md:text-4xl font-black tracking-tight">
           The person behind the code
         </h2>
       </motion.div>
 
       {/* Main Content Grid */}
-      <div className="grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-20">
+      <div className="grid gap-8 md:gap-10 lg:grid-cols-2 lg:items-center">
         {/* Left Column - Image and Stats */}
         <motion.div
           className="flex flex-col items-center gap-8 lg:items-start"

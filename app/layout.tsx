@@ -30,6 +30,10 @@ export const metadata: Metadata = {
     description: "Building fast, accessible, and beautiful web experiences",
     creator: "@tanamaroby",
   },
+  other: {
+    "apple-mobile-web-app-capable": "yes",
+    "apple-mobile-web-app-status-bar-style": "black-translucent",
+  },
 };
 
 export default function RootLayout({

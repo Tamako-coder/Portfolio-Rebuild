@@ -1,275 +1,123 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { personalInfo } from "@/lib/data/portfolio-data";
 import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
-import { Mail, MapPin, Send, CheckCircle2 } from "lucide-react";
+import { Mail, ArrowUpRight } from "lucide-react";
 
 export default function ContactPage() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({ name: "", email: "", subject: "", message: "" });
-    }, 3000);
-  };
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const socialLinks = [
-    { icon: FaGithub, href: personalInfo.social.github, label: "GitHub" },
-    { icon: FaLinkedin, href: personalInfo.social.linkedin, label: "LinkedIn" },
-    { icon: FaXTwitter, href: personalInfo.social.twitter, label: "Twitter/X" },
+  const contactLinks = [
+    {
+      icon: Mail,
+      title: "Email",
+      description: "Drop me a message",
+      href: `mailto:${personalInfo.social.email}`,
+      label: personalInfo.social.email,
+    },
+    {
+      icon: FaLinkedin,
+      title: "LinkedIn",
+      description: "Let's connect",
+      href: personalInfo.social.linkedin,
+      label: "Connect on LinkedIn",
+    },
+    {
+      icon: FaGithub,
+      title: "GitHub",
+      description: "See my code",
+      href: personalInfo.social.github,
+      label: "Check out my repos",
+    },
+    {
+      icon: FaXTwitter,
+      title: "Twitter / X",
+      description: "Follow my thoughts",
+      href: personalInfo.social.twitter,
+      label: "Follow on X",
+    },
   ];
 
   return (
-    <div className="min-h-screen py-20">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
-        {/* Header */}
+    <div className="min-h-screen flex items-center justify-center pt-16 pb-8 md:pt-20 md:pb-30 relative overflow-hidden">
+      {/* Diagonal background accents */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-br from-primary/10 via-transparent to-transparent transform rotate-6 scale-150" />
+        <div className="absolute bottom-0 left-0 w-2/3 h-2/3 bg-gradient-to-tr from-available/10 via-transparent to-transparent transform -rotate-12" />
+      </div>
+
+      <div className="container mx-auto px-4 sm:px-6 max-w-4xl">
+        {/* Hero Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          className="text-center mb-12 md:mb-16"
         >
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-            Get in Touch
+          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground mb-4 block">
+            CONTACT
+          </span>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6">
+            Let's work together
           </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Have a project in mind? Let&apos;s work together to build something great
+          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
+            Have a project in mind, a role to fill, or just want to say hi? I'm always happy to chat.
           </p>
+
+          {/* Say Hello Button */}
+          <motion.a
+            href={`mailto:${personalInfo.social.email}`}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 text-base font-semibold transition-all hover:scale-105 shadow-lg shadow-primary/20"
+          >
+            <Mail className="w-5 h-5" />
+            Say Hello
+            <ArrowUpRight className="w-5 h-5" />
+          </motion.a>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="lg:col-span-2"
-          >
-            <Card className="border-2">
-              <CardContent className="p-8">
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  {/* Name */}
-                  <div>
-                    <label
-                      htmlFor="name"
-                      className="block text-sm font-medium mb-2"
-                    >
-                      Name *
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-2 rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
-                      placeholder="Your name"
-                    />
-                  </div>
+        {/* Contact Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 max-w-3xl mx-auto">
+          {contactLinks.map((link, index) => (
+            <motion.a
+              key={link.title}
+              href={link.href}
+              target={link.href.startsWith('mailto:') ? undefined : "_blank"}
+              rel={link.href.startsWith('mailto:') ? undefined : "noopener noreferrer"}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
+              className="group"
+            >
+              <Card className="h-full border border-border/50 bg-card/50 backdrop-blur-sm hover:border-primary/50 hover:bg-card/80 transition-all duration-300 hover:shadow-xl hover:shadow-primary/5">
+                <CardContent className="p-6 md:p-7">
+                  <div className="flex items-start justify-between">
+                    <div className="flex items-start gap-4 flex-1">
+                      {/* Icon */}
+                      <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                        <link.icon className="w-6 h-6" />
+                      </div>
 
-                  {/* Email */}
-                  <div>
-                    <label
-                      htmlFor="email"
-                      className="block text-sm font-medium mb-2"
-                    >
-                      Email *
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-2 rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
-                      placeholder="your.email@example.com"
-                    />
-                  </div>
+                      {/* Content */}
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-lg font-bold mb-1 group-hover:text-primary transition-colors">
+                          {link.title}
+                        </h3>
+                        <p className="text-sm text-muted-foreground">
+                          {link.description}
+                        </p>
+                      </div>
+                    </div>
 
-                  {/* Subject */}
-                  <div>
-                    <label
-                      htmlFor="subject"
-                      className="block text-sm font-medium mb-2"
-                    >
-                      Subject *
-                    </label>
-                    <input
-                      type="text"
-                      id="subject"
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-2 rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
-                      placeholder="Project inquiry"
-                    />
+                    {/* Arrow Icon */}
+                    <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 group-hover:-translate-y-1 transition-all flex-shrink-0" />
                   </div>
-
-                  {/* Message */}
-                  <div>
-                    <label
-                      htmlFor="message"
-                      className="block text-sm font-medium mb-2"
-                    >
-                      Message *
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      required
-                      rows={6}
-                      className="w-full px-4 py-2 rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all resize-none"
-                      placeholder="Tell me about your project..."
-                    />
-                  </div>
-
-                  {/* Submit Button */}
-                  <button
-                    type="submit"
-                    disabled={isSubmitting || isSubmitted}
-                    className={`w-full inline-flex items-center justify-center gap-2 rounded-lg border border-transparent h-10 px-4 text-sm font-medium transition-all ${
-                      isSubmitted
-                        ? "bg-green-600 text-white"
-                        : "bg-primary text-primary-foreground hover:bg-primary/80"
-                    } disabled:opacity-50 disabled:cursor-not-allowed`}
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <span className="animate-spin">⏳</span>
-                        Sending...
-                      </>
-                    ) : isSubmitted ? (
-                      <>
-                        <CheckCircle2 size={20} />
-                        Message Sent!
-                      </>
-                    ) : (
-                      <>
-                        <Send size={20} />
-                        Send Message
-                      </>
-                    )}
-                  </button>
-                </form>
-              </CardContent>
-            </Card>
-          </motion.div>
-
-          {/* Contact Info Sidebar */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="space-y-6"
-          >
-            {/* Email Card */}
-            <Card className="border-2">
-              <CardContent className="p-6">
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center flex-shrink-0">
-                    <Mail size={20} />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="font-semibold mb-2">Email</h3>
-                    <a
-                      href={`mailto:${personalInfo.social.email}`}
-                      className="text-sm text-muted-foreground hover:text-primary transition-colors break-all"
-                    >
-                      {personalInfo.social.email}
-                    </a>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Location Card */}
-            <Card className="border-2">
-              <CardContent className="p-6">
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center flex-shrink-0">
-                    <MapPin size={20} />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-semibold mb-2">Location</h3>
-                    <p className="text-sm text-muted-foreground">
-                      {personalInfo.location}
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Availability Card */}
-            <Card className="border-2 bg-muted/30">
-              <CardContent className="p-6">
-                <div className="space-y-3">
-                  <Badge variant="secondary" className="w-fit">
-                    {personalInfo.status}
-                  </Badge>
-                  <p className="text-sm text-muted-foreground">
-                    Available for freelance projects and consulting opportunities
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Social Links Card */}
-            <Card className="border-2">
-              <CardContent className="p-6">
-                <h3 className="font-semibold mb-4">Connect</h3>
-                <div className="flex gap-4">
-                  {socialLinks.map((social) => (
-                    <a
-                      key={social.label}
-                      href={social.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-10 h-10 rounded-lg border border-border hover:border-primary bg-background hover:bg-muted flex items-center justify-center text-muted-foreground hover:text-foreground transition-all"
-                      aria-label={social.label}
-                    >
-                      <social.icon size={20} />
-                    </a>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
+                </CardContent>
+              </Card>
+            </motion.a>
+          ))}
         </div>
       </div>
     </div>

@@ -15,7 +15,7 @@ const socialLinks = [
 
 export function HeroSection() {
   return (
-    <section className="relative overflow-hidden py-12 sm:py-16 md:py-20 lg:py-24">
+    <section className="relative overflow-hidden pt-24 pb-12 sm:pt-28 sm:pb-16 md:pt-32 md:pb-20 lg:pt-36 lg:pb-24">
       {/* Diagonal background accent */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-br from-primary/5 via-transparent to-transparent transform rotate-6 scale-150" />
@@ -29,13 +29,13 @@ export function HeroSection() {
           {/* Left column - Main content */}
           <div className="lg:col-span-7 space-y-4 sm:space-y-5">
             {/* Name and Status Badge side by side */}
-            <div className="flex flex-col lg:flex-row lg:items-end lg:gap-4">
+            <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:gap-4">
               {/* Name - Bold, tight, left-aligned */}
               <motion.h1
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
-                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter leading-[0.95] mb-4 lg:mb-0"
+                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter leading-[0.95]"
               >
                 {personalInfo.name.split(" ").map((word, i) => (
                   <span key={i} className={i === 1 ? "text-primary block" : "block"}>

@@ -92,10 +92,10 @@ const fadeInUp = {
 
 export function ExperienceSection() {
   return (
-    <section id="experience" className="section-padding mx-auto max-w-6xl">
+    <section id="experience" className="mx-auto max-w-6xl px-4 sm:px-6">
       {/* Section Header */}
       <motion.div
-        className="mb-16 flex flex-col items-center gap-3 text-center"
+        className="mb-8 md:mb-10 flex flex-col items-start gap-2"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -104,8 +104,8 @@ export function ExperienceSection() {
         <span className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
           Experience
         </span>
-        <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Where I've worked</h2>
-        <p className="max-w-md text-muted-foreground">
+        <h2 className="text-3xl md:text-4xl font-black tracking-tight">Where I've worked</h2>
+        <p className="max-w-md text-base text-muted-foreground">
           A journey through the companies and roles that have shaped who I am as an engineer.
         </p>
       </motion.div>
@@ -119,7 +119,7 @@ export function ExperienceSection() {
         {experiences.map((exp, index) => (
           <motion.div
             key={exp.id}
-            className="relative flex gap-6 pb-10 last:pb-0"
+            className="relative flex gap-6 pb-6 last:pb-0"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -139,12 +139,12 @@ export function ExperienceSection() {
             </div>
 
             {/* Content Card */}
-            <div className="flex-1 rounded-2xl border border-border/50 bg-card p-6 transition-all duration-300 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5">
+            <div className="flex-1 rounded-xl border border-border/50 bg-card p-4 md:p-5 transition-all duration-300 hover:border-primary/30 hover:shadow-md">
               {/* Header */}
-              <div className="mb-3 flex flex-wrap items-start justify-between gap-3">
+              <div className="mb-2 flex flex-wrap items-start justify-between gap-2">
                 <div>
                   <div className="flex items-center gap-2 flex-wrap">
-                    <h3 className="text-lg font-semibold text-foreground">{exp.role}</h3>
+                    <h3 className="text-base md:text-lg font-bold text-foreground">{exp.role}</h3>
                     {exp.current && (
                       <Badge
                         variant="default"
@@ -178,13 +178,13 @@ export function ExperienceSection() {
               </div>
 
               {/* Description */}
-              <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
+              <p className="mb-3 text-sm leading-relaxed text-muted-foreground">
                 {exp.description}
               </p>
 
               {/* Highlights */}
               {exp.highlights && exp.highlights.length > 0 && (
-                <ul className="mb-4 flex flex-col gap-1.5">
+                <ul className="mb-3 flex flex-col gap-1.5">
                   {exp.highlights.map((highlight, idx) => (
                     <li key={idx} className="flex items-start gap-2 text-sm text-muted-foreground">
                       <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary/60" />
@@ -200,7 +200,7 @@ export function ExperienceSection() {
                   <Badge
                     key={tech}
                     variant="secondary"
-                    className="border border-border/40 bg-secondary px-2.5 py-0.5 text-xs font-medium text-secondary-foreground"
+                    className="border border-border/40 bg-secondary px-2 py-0.5 text-xs font-medium text-secondary-foreground"
                   >
                     {tech}
                   </Badge>
@@ -213,7 +213,7 @@ export function ExperienceSection() {
 
       {/* Education */}
       <motion.div
-        className="mt-12 flex items-center gap-4 rounded-2xl border border-border/50 bg-card p-6"
+        className="mt-8 flex items-center gap-4 rounded-xl border border-border/50 bg-card p-4 md:p-5"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -234,6 +234,26 @@ export function ExperienceSection() {
           <Briefcase className="h-3.5 w-3.5 text-muted-foreground" aria-hidden="true" />
           <span className="text-xs text-muted-foreground">Education</span>
         </div>
+      </motion.div>
+
+      {/* Download Resume Button */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: 0.5 }}
+        className="mt-8 flex justify-center"
+      >
+        <button
+          className="inline-flex items-center gap-2 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-2.5 text-sm font-semibold transition-all"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          Download Resume
+        </button>
       </motion.div>
     </section>
   );
