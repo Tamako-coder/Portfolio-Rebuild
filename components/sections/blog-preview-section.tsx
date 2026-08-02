@@ -11,26 +11,29 @@ export function BlogPreviewSection() {
   const recentPosts = blogPosts.slice(0, 2);
 
   return (
-    <section className="py-20 md:py-32">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
+    <section className="py-12 md:py-16 relative overflow-hidden">
+      {/* Diagonal accent */}
+      <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-tr from-muted/30 to-transparent transform skew-y-2 -z-10" />
+
+      <div className="container mx-auto px-4 sm:px-6">
+        {/* Section Header - Left aligned */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          className="mb-8 md:mb-12 max-w-3xl"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+          <h2 className="text-3xl md:text-5xl font-black tracking-tight mb-2">
             Latest Insights
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Practical writing on Next.js, React, AG Grid, and building bespoke software for real businesses.
+          <p className="text-base md:text-lg text-muted-foreground border-l-4 border-primary pl-4">
+            Practical writing on Next.js, React, AG Grid, and building bespoke software
           </p>
         </motion.div>
 
-        {/* Blog Posts Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 mb-12">
+        {/* Blog Posts - Asymmetric layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 mb-6">
           {recentPosts.map((post, index) => (
             <motion.div
               key={post.id}
@@ -39,72 +42,72 @@ export function BlogPreviewSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <Card className="h-full group hover:shadow-lg transition-all duration-300 border-2 hover:border-primary/50">
-                <CardHeader>
-                  <div className="flex items-center gap-4 text-xs text-muted-foreground mb-3">
-                    <div className="flex items-center gap-1">
-                      <Calendar size={14} />
-                      <span>
-                        {new Date(post.date).toLocaleDateString("en-US", {
-                          month: "short",
-                          day: "numeric",
-                          year: "numeric",
-                        })}
-                      </span>
+              <Link href={post.href} className="block group h-full">
+                <Card className="h-full hover:shadow-xl transition-all duration-300 border hover:border-primary/50 bg-card/50 backdrop-blur-sm transform hover:-rotate-1">
+                  <CardHeader className="p-4 md:p-5 space-y-3">
+                    {/* Meta info - compact */}
+                    <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                      <div className="flex items-center gap-1">
+                        <Calendar className="w-3 h-3" />
+                        <span>
+                          {new Date(post.date).toLocaleDateString("en-US", {
+                            month: "short",
+                            day: "numeric",
+                            year: "numeric",
+                          })}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Clock className="w-3 h-3" />
+                        <span>{post.readTime}</span>
+                      </div>
                     </div>
-                    <div className="flex items-center gap-1">
-                      <Clock size={14} />
-                      <span>{post.readTime}</span>
+
+                    <CardTitle className="text-lg md:text-xl font-bold group-hover:text-primary transition-colors line-clamp-2">
+                      {post.title}
+                    </CardTitle>
+
+                    <CardDescription className="text-sm line-clamp-2">
+                      {post.excerpt}
+                    </CardDescription>
+                  </CardHeader>
+
+                  <CardContent className="p-4 md:p-5 pt-0 space-y-3">
+                    {/* Topics - compact */}
+                    <div className="flex flex-wrap gap-1.5">
+                      {post.topics.map((topic) => (
+                        <Badge key={topic} variant="secondary" className="text-xs px-2 py-0.5">
+                          {topic}
+                        </Badge>
+                      ))}
                     </div>
-                  </div>
 
-                  <CardTitle className="text-xl mb-2 group-hover:text-primary transition-colors line-clamp-2">
-                    {post.title}
-                  </CardTitle>
-
-                  <CardDescription className="line-clamp-2">
-                    {post.excerpt}
-                  </CardDescription>
-                </CardHeader>
-
-                <CardContent className="space-y-4">
-                  {/* Topics */}
-                  <div className="flex flex-wrap gap-2">
-                    {post.topics.map((topic) => (
-                      <Badge key={topic} variant="secondary" className="text-xs">
-                        {topic}
-                      </Badge>
-                    ))}
-                  </div>
-
-                  {/* Read More Link */}
-                  <Link
-                    href={post.href}
-                    className="inline-flex items-center text-sm font-medium text-primary hover:underline"
-                  >
-                    Read Article
-                    <ArrowRight size={16} className="ml-1" />
-                  </Link>
-                </CardContent>
-              </Card>
+                    {/* Read More Link */}
+                    <div className="inline-flex items-center gap-1 text-sm font-semibold text-primary group-hover:gap-2 transition-all">
+                      Read Article
+                      <ArrowRight className="w-4 h-4" />
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
             </motion.div>
           ))}
         </div>
 
-        {/* View All Blog Posts CTA */}
+        {/* View All Blog Posts CTA - Left aligned */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-center"
+          className="flex justify-start"
         >
           <Link
             href="/blog"
-            className="inline-flex shrink-0 items-center justify-center rounded-lg border border-border bg-background hover:bg-muted hover:text-foreground h-9 gap-1.5 px-2.5 text-sm font-medium transition-all"
+            className="group inline-flex items-center gap-2 rounded-lg border-2 border-border hover:border-primary bg-background hover:bg-primary/5 px-5 py-2.5 text-sm font-semibold transition-all hover:gap-3"
           >
             View All Articles
-            <ArrowRight size={20} className="ml-2" />
+            <ArrowRight className="w-4 h-4" />
           </Link>
         </motion.div>
       </div>

@@ -1,0 +1,354 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { personalInfo, skills, roles } from "@/lib/data/portfolio-data";
+import { MapPin, GraduationCap, Briefcase, Code2, Sparkles } from "lucide-react";
+import Image from "next/image";
+
+export default function AboutPage() {
+  return (
+    <div className="min-h-screen py-20">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-16"
+        >
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+            About Me
+          </h1>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Full-stack engineer building production-ready web applications
+          </p>
+        </motion.div>
+
+        {/* Profile Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="mb-16"
+        >
+          <Card className="border-2">
+            <CardContent className="p-8">
+              <div className="flex flex-col md:flex-row gap-8 items-start">
+                {/* Avatar */}
+                <div className="flex-shrink-0 mx-auto md:mx-0">
+                  <div className="w-32 h-32 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center text-5xl font-bold text-primary overflow-hidden">
+                    {personalInfo.avatar ? (
+                      <Image
+                        src={personalInfo.avatar}
+                        alt={personalInfo.name}
+                        width={128}
+                        height={128}
+                        className="object-cover w-full h-full"
+                      />
+                    ) : (
+                      personalInfo.initials
+                    )}
+                  </div>
+                </div>
+
+                {/* Info */}
+                <div className="flex-1 space-y-4">
+                  <div>
+                    <h2 className="text-3xl font-bold mb-2">{personalInfo.name}</h2>
+                    <p className="text-lg text-muted-foreground">{personalInfo.title}</p>
+                  </div>
+
+                  <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
+                    <div className="flex items-center gap-2">
+                      <MapPin size={16} />
+                      <span>{personalInfo.location}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <GraduationCap size={16} />
+                      <span>{personalInfo.education}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Briefcase size={16} />
+                      <span>{personalInfo.status}</span>
+                    </div>
+                  </div>
+
+                  {/* Roles */}
+                  <div className="flex flex-wrap gap-2 pt-2">
+                    {roles.map((role) => (
+                      <Badge key={role} variant="secondary">
+                        {role}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </motion.div>
+
+        {/* Story Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mb-16"
+        >
+          <div className="flex items-center gap-3 mb-6">
+            <Sparkles className="text-primary" size={24} />
+            <h2 className="text-2xl md:text-3xl font-bold">My Story</h2>
+          </div>
+          <div className="space-y-4 text-muted-foreground leading-relaxed">
+            <p>
+              I'm a full-stack engineer and CTO at TrieTech, where I build fast, accessible,
+              and beautiful web experiences. My focus is on production-ready, industry-grade
+              applications that solve real business problems.
+            </p>
+            <p>
+              With over 6 years of experience, I've worked on everything from social media
+              platforms to enterprise ERPs, multiplayer games to budget management apps.
+              I specialize in the modern web stack—Next.js, TypeScript, Supabase, and
+              Tailwind CSS—and I'm passionate about writing clean, maintainable code.
+            </p>
+            <p>
+              As a NUS alumnus, I've honed my skills through both academic projects and
+              real-world client work. I believe in building with purpose: every feature
+              should serve the user, every optimization should matter, and every line of
+              code should be intentional.
+            </p>
+            <p>
+              When I'm not coding, I'm exploring new technologies, contributing to open
+              source, or helping teams build better software through mentorship and
+              technical leadership.
+            </p>
+          </div>
+        </motion.div>
+
+        {/* Skills Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="mb-16"
+        >
+          <div className="flex items-center gap-3 mb-6">
+            <Code2 className="text-primary" size={24} />
+            <h2 className="text-2xl md:text-3xl font-bold">Skills & Expertise</h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Languages */}
+            <div className="group rounded-2xl border border-border/50 bg-card p-6 transition-all duration-300 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5">
+              <h3 className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-primary">Languages</h3>
+              <div className="flex flex-wrap gap-2">
+                {skills.languages.map((skill) => (
+                  <Badge
+                    key={skill}
+                    variant="secondary"
+                    className="border border-border/40 bg-secondary px-3 py-1 text-sm font-medium text-secondary-foreground transition-colors hover:border-primary/40 hover:bg-primary/10 hover:text-primary"
+                  >
+                    {skill}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+
+            {/* Frontend */}
+            <div className="group rounded-2xl border border-border/50 bg-card p-6 transition-all duration-300 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5">
+              <h3 className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-primary">Frontend</h3>
+              <div className="flex flex-wrap gap-2">
+                {skills.frontend.map((skill) => (
+                  <Badge
+                    key={skill}
+                    variant="secondary"
+                    className="border border-border/40 bg-secondary px-3 py-1 text-sm font-medium text-secondary-foreground transition-colors hover:border-primary/40 hover:bg-primary/10 hover:text-primary"
+                  >
+                    {skill}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+
+            {/* Backend */}
+            <div className="group rounded-2xl border border-border/50 bg-card p-6 transition-all duration-300 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5">
+              <h3 className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-primary">Backend</h3>
+              <div className="flex flex-wrap gap-2">
+                {skills.backend.map((skill) => (
+                  <Badge
+                    key={skill}
+                    variant="secondary"
+                    className="border border-border/40 bg-secondary px-3 py-1 text-sm font-medium text-secondary-foreground transition-colors hover:border-primary/40 hover:bg-primary/10 hover:text-primary"
+                  >
+                    {skill}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+
+            {/* Database */}
+            <div className="group rounded-2xl border border-border/50 bg-card p-6 transition-all duration-300 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5">
+              <h3 className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-primary">Database</h3>
+              <div className="flex flex-wrap gap-2">
+                {skills.database.map((skill) => (
+                  <Badge
+                    key={skill}
+                    variant="secondary"
+                    className="border border-border/40 bg-secondary px-3 py-1 text-sm font-medium text-secondary-foreground transition-colors hover:border-primary/40 hover:bg-primary/10 hover:text-primary"
+                  >
+                    {skill}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+
+            {/* DevOps & Cloud */}
+            <div className="group rounded-2xl border border-border/50 bg-card p-6 transition-all duration-300 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5">
+              <h3 className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-primary">DevOps & Cloud</h3>
+              <div className="flex flex-wrap gap-2">
+                {skills.devops.map((skill) => (
+                  <Badge
+                    key={skill}
+                    variant="secondary"
+                    className="border border-border/40 bg-secondary px-3 py-1 text-sm font-medium text-secondary-foreground transition-colors hover:border-primary/40 hover:bg-primary/10 hover:text-primary"
+                  >
+                    {skill}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+
+            {/* Tools & Practices */}
+            <div className="group rounded-2xl border border-border/50 bg-card p-6 transition-all duration-300 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5">
+              <h3 className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-primary">Tools & Practices</h3>
+              <div className="flex flex-wrap gap-2">
+                {skills.tools.map((skill) => (
+                  <Badge
+                    key={skill}
+                    variant="secondary"
+                    className="border border-border/40 bg-secondary px-3 py-1 text-sm font-medium text-secondary-foreground transition-colors hover:border-primary/40 hover:bg-primary/10 hover:text-primary"
+                  >
+                    {skill}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+          </div>
+        </motion.div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Frontend */}
+            <Card className="border-2">
+              <CardContent className="p-6">
+                <h3 className="font-semibold text-lg mb-4 text-primary">Frontend</h3>
+                <div className="flex flex-wrap gap-2">
+                  {skills.frontend.map((skill) => (
+                    <Badge key={skill} variant="secondary">
+                      {skill}
+                    </Badge>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Backend */}
+            <Card className="border-2">
+              <CardContent className="p-6">
+                <h3 className="font-semibold text-lg mb-4 text-primary">Backend</h3>
+                <div className="flex flex-wrap gap-2">
+                  {skills.backend.map((skill) => (
+                    <Badge key={skill} variant="secondary">
+                      {skill}
+                    </Badge>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Database */}
+            <Card className="border-2">
+              <CardContent className="p-6">
+                <h3 className="font-semibold text-lg mb-4 text-primary">Database</h3>
+                <div className="flex flex-wrap gap-2">
+                  {skills.database.map((skill) => (
+                    <Badge key={skill} variant="secondary">
+                      {skill}
+                    </Badge>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* DevOps */}
+            <Card className="border-2">
+              <CardContent className="p-6">
+                <h3 className="font-semibold text-lg mb-4 text-primary">DevOps & Cloud</h3>
+                <div className="flex flex-wrap gap-2">
+                  {skills.devops.map((skill) => (
+                    <Badge key={skill} variant="secondary">
+                      {skill}
+                    </Badge>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Tools */}
+            <Card className="border-2">
+              <CardContent className="p-6">
+                <h3 className="font-semibold text-lg mb-4 text-primary">Tools & Practices</h3>
+                <div className="flex flex-wrap gap-2">
+                  {skills.tools.map((skill) => (
+                    <Badge key={skill} variant="secondary">
+                      {skill}
+                    </Badge>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </motion.div>
+
+        {/* Work Philosophy */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+        >
+          <h2 className="text-2xl md:text-3xl font-bold mb-6">Work Philosophy</h2>
+          <Card className="border-2 bg-muted/30">
+            <CardContent className="p-8">
+              <div className="space-y-6">
+                <div>
+                  <h3 className="font-semibold text-lg mb-2 text-primary">Production-First</h3>
+                  <p className="text-muted-foreground">
+                    Every project should be built for production from day one. Scalability,
+                    performance, and maintainability aren't afterthoughts—they're requirements.
+                  </p>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-lg mb-2 text-primary">User-Centric</h3>
+                  <p className="text-muted-foreground">
+                    Technology serves people. Fast load times, accessible interfaces, and
+                    intuitive UX aren't nice-to-haves—they're essential.
+                  </p>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-lg mb-2 text-primary">Iterative Excellence</h3>
+                  <p className="text-muted-foreground">
+                    Ship fast, gather feedback, iterate. Perfect is the enemy of good, but
+                    good is never the enemy of better.
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </motion.div>
+      </div>
+    </div>
+  );
+}
