@@ -1,161 +1,158 @@
-# Portfolio Website
+# Roby Tanama - Portfolio Website
 
-A modern, responsive portfolio website built with Next.js 15, featuring an asymmetric creative layout with diagonal backgrounds, smooth animations, and a tight, professional design.
+A modern, multi-page portfolio website built with Next.js, TypeScript, Tailwind CSS, and Framer Motion.
 
-![Next.js](https://img.shields.io/badge/Next.js-15.1-black?logo=next.js)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?logo=typescript)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.0-38bdf8?logo=tailwindcss)
+## Features
 
-## ✨ Features
-
-- **Asymmetric Creative Layout** - Diagonal backgrounds and overlapping elements
-- **Tight, Modern Design** - Compact spacing optimized for all screen sizes
-- **Smooth Animations** - Framer Motion powered transitions
-- **Hide-on-Scroll Navigation** - Clean header that hides when scrolling down
-- **Responsive Design** - Mobile-first approach with careful attention to mobile spacing
-- **Dark Mode** - Beautiful dark theme with subtle gradients
-- **4 Project Showcase** - Bento grid layout with image support
+- **Multi-page Architecture**: Clean separation of content across dedicated pages
+- **Responsive Design**: Fully responsive across all devices
+- **Dark Mode**: Beautiful dark theme optimized for readability
+- **Smooth Animations**: Framer Motion animations for enhanced UX
+- **SEO Optimized**: Proper meta tags and semantic HTML
+- **Type-Safe**: Built with TypeScript for robust development
+- **Modern UI**: Using ShadCN UI components with Tailwind CSS
 
 ## 📁 Project Structure
 
 ```
-├── app/                    # Next.js app directory
-│   ├── page.tsx           # Home page
-│   ├── about/             # About page
-│   ├── experience/        # Experience timeline
-│   ├── work/              # Projects showcase
-│   ├── blog/              # Blog listing
-│   ├── contact/           # Contact page (minimal design)
-│   └── layout.tsx         # Root layout
+├── app/
+│   ├── about/           # About page
+│   ├── blog/            # Blog listing and articles
+│   ├── changelog/       # Site changelog
+│   ├── contact/         # Contact page
+│   ├── experience/      # Professional experience
+│   ├── work/            # Portfolio index and project pages
+│   ├── layout.tsx       # Root layout with navigation and footer
+│   ├── page.tsx         # Homepage
+│   └── globals.css      # Global styles and theme
 ├── components/
-│   ├── sections/          # Page sections
-│   │   ├── hero-section.tsx
-│   │   ├── featured-projects-section.tsx
-│   │   ├── skills-section.tsx
-│   │   └── ...
-│   ├── navigation.tsx     # Auto-hide navigation
-│   ├── footer.tsx         # Footer component
-│   └── ui/                # ShadCN UI components
-├── lib/
-│   └── data/
-│       └── portfolio-data.ts  # All content data
-└── public/
-    └── images/            # Project images and assets
+│   ├── sections/        # Page sections (Hero, Stats, Projects, etc.)
+│   ├── ui/              # Reusable UI components (ShadCN)
+│   ├── navigation.tsx   # Global navigation component
+│   └── footer.tsx       # Global footer component
+└── lib/
+    └── data/            # Portfolio data and content
 ```
 
-## 🚀 Getting Started
+## Pages Overview
+
+### Home (/)
+- Hero section with name, title, and CTAs
+- Stats showcase (experience, projects, clients)
+- Featured projects preview
+- Tech stack/skills overview
+- Recent blog posts
+- Call-to-action section
+
+### Work (/work)
+- Portfolio index with all projects
+- Filterable by technology
+- Individual project pages (/work/[slug])
+
+### About (/about)
+- Personal story and background
+- Professional journey
+- Skills and expertise
+- Work philosophy
+
+### Experience (/experience)
+- Professional timeline
+- Education
+- Key achievements
+
+### Blog (/blog)
+- Article listing
+- Individual article pages
+- Topic filtering
+
+### Contact (/contact)
+- Contact form
+- Social links
+- Availability status
+
+## Tech Stack
+
+- **Framework**: Next.js 14+ (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS v4
+- **UI Components**: ShadCN UI
+- **Animations**: Framer Motion
+- **Icons**: Lucide React
+- **Deployment**: Vercel (recommended)
+## Getting Started
 
 ### Prerequisites
 
-- Node.js 18+ 
-- npm or yarn
+- Node.js 18+ and npm
 
 ### Installation
 
 ```bash
-# Clone the repository
-git clone https://github.com/tanamaroby/portfolio.git
-
-# Navigate to project directory
-cd portfolio
-
 # Install dependencies
 npm install
 
 # Run development server
 npm run dev
+
+# Build for production
+npm run build
+
+# Start production server
+npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Open [http://localhost:3000](http://localhost:3000) to view the site.
 
-## 🛠️ Built With
+## 📝 Content Management
 
-- **[Next.js 15](https://nextjs.org/)** - React framework with App Router
-- **[TypeScript](https://www.typescriptlang.org/)** - Type-safe JavaScript
-- **[Tailwind CSS v4](https://tailwindcss.com/)** - Utility-first CSS framework
-- **[Framer Motion](https://www.framer.com/motion/)** - Animation library
-- **[ShadCN UI](https://ui.shadcn.com/)** - Re-usable component library
-- **[Lucide React](https://lucide.dev/)** - Icon library
-- **[React Icons](https://react-icons.github.io/react-icons/)** - Additional icons
+All portfolio content is managed in `/lib/data/portfolio-data.ts`. Update this file to:
 
-## 🎨 Customization
+- Add/remove projects
+- Update personal information
+- Modify social links
+- Add blog posts
+- Update skills and experience
 
-### Update Personal Information
+## 🎯 Next Steps
 
-Edit `lib/data/portfolio-data.ts`:
+### Immediate Priorities:
+1. Add real project images to `/public/images/projects/`
+2. Build out individual project pages with detailed case studies
+3. Complete About, Experience, and Blog pages
+4. Implement contact form functionality
+5. Add project GitHub repository links
 
-```typescript
-export const personalInfo = {
-  name: "Your Name",
-  initials: "YN",
-  title: "Your Title",
-  tagline: "Your tagline",
-  status: "Your availability status",
-  location: "Your Location",
-  social: {
-    github: "https://github.com/yourusername",
-    linkedin: "https://linkedin.com/in/yourusername",
-    twitter: "https://twitter.com/yourusername",
-    email: "your.email@example.com"
-  }
-};
-```
+### Content Needed:
+- High-quality project screenshots
+- Detailed project descriptions
+- Blog article content (MDX format)
+- Professional photos/avatar
+- Client testimonials (with permission)
 
-### Add Projects
+## 🔧 Development Notes
 
-Add projects to `featuredProjects` or `allProjects` in `portfolio-data.ts`:
+- The site uses dark mode by default (configured in `layout.tsx`)
+- Navigation is sticky and responsive
+- All pages use consistent layout with header and footer
+- Animations are triggered on scroll using Framer Motion's viewport detection
 
-```typescript
+## 📦 Key Dependencies
+
+```json
 {
-  id: "project-id",
-  title: "Project Name",
-  tagline: "One-line description",
-  description: "Detailed description",
-  image: "/images/projects/project.jpg",
-  tags: ["Next.js", "TypeScript", "Tailwind"],
-  href: "/work/project-id",
-  featured: true,
-  award: "Optional award text"
+  "next": "^16.2.12",
+  "react": "^19.x",
+  "typescript": "^5.x",
+  "tailwindcss": "^4.x",
+  "framer-motion": "^11.x",
+  "lucide-react": "latest"
 }
 ```
 
-### Customize Colors
+## 📄 License
 
-Update theme colors in `app/globals.css`:
-
-```css
-:root {
-  --primary: oklch(0.205 0 0);
-  --background: oklch(1 0 0);
-  --available: oklch(0.65 0.2 145);
-  /* ... other colors */
-}
-```
-
-## 📄 Pages
-
-- **Home** (`/`) - Hero section with stats, featured projects, skills, and blog preview
-- **About** (`/about`) - Personal info with profile image and role badges
-- **Work** (`/work`) - All projects with filterable tags
-- **Experience** (`/experience`) - Professional timeline with download resume button
-- **Blog** (`/blog`) - Blog post listing
-- **Contact** (`/contact`) - Minimal contact page with social links
-
-## 🎯 Design Philosophy
-
-- **Tighter layouts** - Reduced padding and spacing for a more compact feel
-- **Asymmetric elements** - Diagonal backgrounds and left-aligned headers
-- **Bold typography** - Using `font-black` for headers and strong hierarchy
-- **Subtle animations** - Smooth transitions without being distracting
-- **Mobile-optimized** - Careful attention to spacing on mobile devices
-
-## 📱 Responsive Design
-
-- Mobile-first approach
-- Breakpoints: `sm` (640px), `md` (768px), `lg` (1024px)
-- Optimized for phones, tablets, and desktops
-- Touch-friendly interactive elements
+© 2026 Roby Tanama. All rights reserved.
 
 ---
 
-Built with ❤️ by [Roby Tanama](https://github.com/tanamaroby)
+Built with ❤️ using Next.js, ShadCN & Framer Motion

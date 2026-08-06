@@ -54,9 +54,6 @@ export default function ContactPage() {
           transition={{ duration: 0.5 }}
           className="text-center mb-12 md:mb-16"
         >
-          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground mb-4 block">
-            CONTACT
-          </span>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6">
             Let's work together
           </h1>
